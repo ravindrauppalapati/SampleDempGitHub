@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using SampleDempGitHub.Data;
+
 namespace SampleDempGitHub
 {
     public class Program
@@ -14,6 +17,10 @@ namespace SampleDempGitHub
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddDbContext<AppDBContext>(opts =>
+            {
+                opts.UseSqlServer(builder.Configuration.GetConnectionString("dbconnection"));
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
